@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORT GAME</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Team extends React.Component {
+            constructor(props) {
+                super(props)
+
+                this.state = {
+                    ShotsTaken = 0,
+                    score = 0
+                }
+                this.shoot = this.shoot.bind(this);
+                this.goal = this.goal.bind(this)
+            }
+
+            shoot() {
+                this.setState((state, props) => (
+                    { ShotsTaken: state.ShotsTaken + 1 }
+                ))
+            }
+
+            goal() {
+                this.setState((state, props) => (
+                    { ShotsTaken: state.ShotsTaken + 1 }
+                ))
+            }
+
+            GenerateRandomincrease = () => {
+                const Randomincrease = Math.floor(Math.random() * 0.5) + 1;
+                this.setState({
+                    score: Randomincrease
+                })
+            }
+
+            render() {
+                let color = ''
+                color = 'purple'
+
+                setInterval(() => {
+                    this.setstate((state, props) => ({ ShotsTaken: state.ShotsTaken + 1 }))
+                })
+
+                return (
+                    <div>
+                        <h4>ShotsTaken: <span className={color}>{this.state.ShotsTaken}</span></h4>
+                        <h4>Score:<span className={color}> {this.state.score}</span></h4>
+                        <button onClick={this.shoot}>shoot (+)</button>
+                        <button onClick={this.goal}>goal (+)</button>
+                        <img src="./logo1.jpg" alt="homeTeam" />
+                        <img src="./logo2.jpg" alt="visitingTeam" />
+                    </div>
+                )
+            }
+        }
+
+        const element = (
+            <div>
+                <Team homeTeam='0' />
+                <br />
+                <Team visitingTeam='0' />
+
+            </div>
+        )
+
+        ReactDOM.render(
+            element,
+            document.querySelector("#root")
+        )
+    </script>
+
+</body>
+
+</html>
